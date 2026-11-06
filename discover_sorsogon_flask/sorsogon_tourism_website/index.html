@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover the beaches, nature, heritage, food, and culture of Sorsogon Province, Philippines.">
+  <title>Discover Sorsogon | Where Beauty Is Everywhere</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#102b3f; --blue:#176b87; --teal:#168b83; --sand:#f5f1e8;
+      --ink:#1b2b34; --muted:#667780; --white:#fff; --line:#e6e9e8;
+      --gold:#f2b84b; --shadow:0 18px 50px rgba(16,43,63,.12);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:"DM Sans",sans-serif;color:var(--ink);background:#fff}
+    a{color:inherit;text-decoration:none}
+    button,input{font:inherit}
+    img{display:block;width:100%;object-fit:cover}
+    .container{width:min(1160px,calc(100% - 40px));margin:auto}
+    .topbar{background:var(--navy);color:#dce9ed;font-size:12px;padding:9px 0}
+    .topbar .container{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(16,43,63,.07)}
+    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:700;color:var(--navy);letter-spacing:-.4px}
+    .brand-mark{height:39px;width:39px;border-radius:13px;background:linear-gradient(135deg,var(--teal),var(--blue));display:grid;place-items:center;color:white;font-size:21px}
+    .brand small{display:block;font-size:10px;letter-spacing:2px;color:var(--muted);font-weight:600;margin-top:2px}
+    .navlinks{display:flex;align-items:center;gap:27px;font-size:13px;font-weight:600;color:#425762}
+    .navlinks a:hover{color:var(--teal)}
+    .nav-cta,.btn{border:0;border-radius:999px;padding:13px 20px;background:var(--teal);color:white;font-weight:700;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.2s}
+    .nav-cta:hover,.btn:hover{background:var(--navy);transform:translateY(-2px)}
+    .menu-btn{display:none;border:0;background:#edf4f3;color:var(--navy);border-radius:12px;padding:10px 12px;font-size:20px}
+    .hero{min-height:640px;position:relative;display:flex;align-items:center;color:white;overflow:hidden;background:#174d61}
+    .hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,31,47,.82),rgba(7,31,47,.42) 55%,rgba(7,31,47,.12)),url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=2200&q=88") center/cover}
+    .hero-content{position:relative;z-index:1;padding:90px 0 105px;max-width:700px}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;text-transform:uppercase;letter-spacing:2.3px;font-size:10px;font-weight:700;color:#b8e5dc}
+    .eyebrow:before{content:"";width:26px;height:1px;background:var(--gold)}
+    h1,h2,h3{font-family:"Playfair Display",serif}
+    h1{font-size:clamp(48px,7vw,82px);line-height:1.02;letter-spacing:-2px;margin:22px 0}
+    h1 em{font-style:normal;color:#f6c96d}
+    .hero p{font-size:16px;line-height:1.8;color:#e4edf0;max-width:530px;margin:0 0 30px}
+    .hero-actions{display:flex;gap:13px;flex-wrap:wrap}
+    .btn-light{background:white;color:var(--navy)}
+    .btn-light:hover{background:var(--sand);color:var(--navy)}
+    .hero-note{margin-top:58px;display:flex;align-items:center;gap:12px;color:#e2edef;font-size:12px}
+    .hero-note strong{color:white}
+    .hero-note .dot{height:6px;width:6px;background:var(--gold);border-radius:50%}
+    .intro-strip{background:var(--sand);padding:26px 0}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .stat{display:flex;align-items:center;justify-content:center;gap:13px;text-align:left}
+    .stat-icon{font-size:24px}
+    .stat strong{display:block;color:var(--navy);font-size:17px}
+    .stat span{font-size:11px;color:var(--muted)}
+    section{padding:90px 0}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:32px}
+    .section-kicker{color:var(--teal);font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700}
+    h2{font-size:clamp(34px,4vw,48px);line-height:1.12;color:var(--navy);margin:11px 0}
+    .section-head p{max-width:470px;color:var(--muted);font-size:13px;line-height:1.8;margin:0}
+    .search-row{display:flex;gap:12px;margin:25px 0 18px;flex-wrap:wrap}
+    .searchbox{position:relative;flex:1;min-width:230px}
+    .searchbox span{position:absolute;left:17px;top:50%;transform:translateY(-50%);color:#71838b}
+    .searchbox input{width:100%;border:1px solid var(--line);border-radius:999px;padding:14px 18px 14px 45px;outline:none;background:#fbfcfb}
+    .searchbox input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(22,139,131,.1)}
+    .filters{display:flex;gap:8px;flex-wrap:wrap}
+    .filter{border:1px solid var(--line);background:white;color:#5c6d75;border-radius:999px;padding:10px 15px;font-size:11px;font-weight:700;cursor:pointer}
+    .filter.active,.filter:hover{background:var(--navy);border-color:var(--navy);color:white}
+    .spot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:25px}
+    .spot-card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:white;transition:.25s;box-shadow:0 4px 16px rgba(16,43,63,.035)}
+    .spot-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+    .spot-photo{height:220px;position:relative;overflow:hidden;background:#dce8e7}
+    .spot-photo img{height:100%;transition:transform .5s}
+    .spot-card:hover .spot-photo img{transform:scale(1.05)}
+    .tag{position:absolute;top:15px;left:15px;background:rgba(255,255,255,.94);color:var(--navy);border-radius:999px;padding:7px 11px;font-size:9px;text-transform:uppercase;letter-spacing:1px;font-weight:700}
+    .spot-body{padding:20px}
+    .spot-location{font-size:10px;color:var(--teal);font-weight:700;letter-spacing:1px;text-transform:uppercase}
+    .spot-body h3{font-size:22px;color:var(--navy);margin:8px 0}
+    .spot-body p{font-size:12px;line-height:1.75;color:var(--muted);min-height:63px;margin:0 0 17px}
+    .spot-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:14px}
+    .spot-foot small{font-size:10px;color:#7b8a90}
+    .text-link{color:var(--teal);font-size:11px;font-weight:700;cursor:pointer;border:0;background:none;padding:0}
+    .no-results{grid-column:1/-1;text-align:center;color:var(--muted);padding:40px;border:1px dashed var(--line);border-radius:18px}
+    .experience{background:var(--sand)}
+    .experience-grid{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center}
+    .experience-photo{position:relative}
+    .experience-photo img{height:480px;border-radius:28px}
+    .photo-caption{position:absolute;bottom:20px;left:20px;background:white;border-radius:15px;padding:14px 17px;box-shadow:var(--shadow)}
+    .photo-caption strong{display:block;color:var(--navy);font-size:13px}
+    .photo-caption span{font-size:10px;color:var(--muted)}
+    .experience-copy p{font-size:13px;line-height:1.9;color:var(--muted)}
+    .activity-list{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+    .activity{display:flex;gap:12px;align-items:flex-start}
+    .activity-icon{width:39px;height:39px;flex:none;border-radius:13px;background:#dcefeb;display:grid;place-items:center;font-size:18px}
+    .activity strong{font-size:12px;color:var(--navy);display:block;margin:2px 0 4px}
+    .activity span{font-size:10px;line-height:1.6;color:var(--muted)}
+    .culture-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .culture-card{padding:25px;border-radius:20px;background:#f7faf9;border:1px solid #edf1ef}
+    .culture-card .emoji{font-size:26px}
+    .culture-card h3{font-size:21px;color:var(--navy);margin:14px 0 8px}
+    .culture-card p{font-size:12px;line-height:1.8;color:var(--muted);margin:0}
+    .food-banner{background:var(--navy);color:white;padding:65px 0}
+    .food-inner{display:flex;justify-content:space-between;align-items:center;gap:30px}
+    .food-inner h2{color:white;margin:8px 0}
+    .food-inner p{color:#c7d5db;font-size:12px;line-height:1.8;max-width:600px}
+    .food-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+    .food-pills span{border:1px solid rgba(255,255,255,.2);border-radius:99px;padding:8px 12px;font-size:10px;color:#e8f0f1}
+    .planner{background:#f7faf9}
+    .planner-box{background:white;border:1px solid var(--line);border-radius:25px;padding:30px;display:grid;grid-template-columns:1fr auto;gap:25px;align-items:center}
+    .planner-box h3{font-size:26px;color:var(--navy);margin:0 0 8px}
+    .planner-box p{font-size:12px;color:var(--muted);line-height:1.7;margin:0}
+    .planner-actions{display:flex;gap:10px;flex-wrap:wrap}
+    .outline-btn{background:white;color:var(--navy);border:1px solid var(--line)}
+    .outline-btn:hover{background:var(--sand);color:var(--navy)}
+    .footer{background:#0b2131;color:#d5e0e4;padding:55px 0 25px}
+    .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:45px}
+    .footer p{font-size:11px;line-height:1.8;color:#9fb1b9;max-width:360px}
+    .footer h4{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:white;margin:5px 0 17px}
+    .footer a{display:block;color:#aebfc5;font-size:11px;margin:10px 0}
+    .footer a:hover{color:#f6c96d}
+    .copyright{border-top:1px solid rgba(255,255,255,.12);margin-top:35px;padding-top:20px;color:#8299a3;font-size:10px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .modal{position:fixed;inset:0;background:rgba(4,19,29,.72);z-index:50;display:none;align-items:center;justify-content:center;padding:20px}
+    .modal.show{display:flex}
+    .modal-panel{background:white;border-radius:22px;max-width:650px;width:100%;overflow:hidden;position:relative;max-height:90vh;overflow-y:auto}
+    .modal-panel img{height:280px}
+    .modal-content{padding:25px}
+    .modal-content h3{font-size:29px;color:var(--navy);margin:8px 0}
+    .modal-content p{font-size:13px;line-height:1.8;color:var(--muted)}
+    .close-modal{position:absolute;right:14px;top:14px;border:0;background:white;border-radius:50%;height:37px;width:37px;font-size:20px;cursor:pointer}
+    .to-top{position:fixed;right:22px;bottom:22px;width:43px;height:43px;border:0;border-radius:50%;background:var(--teal);color:white;font-size:19px;cursor:pointer;box-shadow:var(--shadow);display:none;z-index:10}
+    .to-top.show{display:block}
+    .disclaimer{font-size:10px;color:#84949a;line-height:1.7;margin-top:22px}
+
+    .account-area{display:flex;align-items:center;gap:10px}
+    .account-name{font-size:11px;color:var(--teal);font-weight:700}
+    .nav-cta{border:0}
+    .stay-section{background:#fff}
+    .stay-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .stay-card{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 4px 16px rgba(16,43,63,.035);transition:.25s}
+    .stay-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+    .stay-image{height:175px;position:relative;background:#e4eeeb}
+    .stay-image img{height:100%}
+    .stay-type{position:absolute;left:14px;top:14px;background:white;color:var(--navy);border-radius:99px;padding:7px 10px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px}
+    .stay-content{padding:19px}
+    .stay-content h3{color:var(--navy);font-size:21px;margin:7px 0}
+    .stay-location{font-size:10px;color:var(--teal);font-weight:700;text-transform:uppercase;letter-spacing:.8px}
+    .stay-content p{font-size:11px;line-height:1.7;color:var(--muted);min-height:42px}
+    .stay-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+    .stay-links a{font-size:10px;font-weight:700;border:1px solid var(--line);border-radius:99px;padding:9px 12px;color:var(--navy)}
+    .stay-links a:hover{background:var(--teal);color:white;border-color:var(--teal)}
+    .calendar-section{background:var(--sand)}
+    .calendar-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:22px;align-items:start}
+    .calendar-card,.event-form{background:white;border:1px solid var(--line);border-radius:22px;padding:23px}
+    .calendar-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+    .calendar-head h3{color:var(--navy);font-size:23px;margin:0}
+    .month-controls{display:flex;gap:7px}
+    .month-controls button{border:1px solid var(--line);background:white;border-radius:10px;padding:8px 12px;cursor:pointer;color:var(--navy)}
+    .month-controls button:hover{background:var(--navy);color:white}
+    .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+    .calendar-dayname{text-align:center;color:#7a898f;font-size:9px;font-weight:700;padding:8px 0}
+    .calendar-date{min-height:66px;border:1px solid #edf0ef;border-radius:11px;background:#fff;padding:8px;text-align:left;cursor:pointer;color:var(--ink);position:relative}
+    .calendar-date:hover{border-color:var(--teal);background:#f1f9f7}
+    .calendar-date.muted{opacity:.35}
+    .calendar-date.today{border-color:var(--teal);background:#edf8f5}
+    .calendar-date.selected{background:var(--navy);color:white;border-color:var(--navy)}
+    .calendar-date .date-num{font-size:11px;font-weight:700}
+    .calendar-date .event-dot{display:block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-top:8px}
+    .selected-date-label{font-size:11px;color:var(--teal);font-weight:700;margin:0 0 12px}
+    .event-form h3{font-size:23px;color:var(--navy);margin:0 0 8px}
+    .event-form p{font-size:11px;line-height:1.7;color:var(--muted)}
+    .form-field{display:block;margin:13px 0}
+    .form-field label{display:block;font-size:10px;font-weight:700;color:#52656d;margin-bottom:6px}
+    .form-field input,.form-field select,.form-field textarea{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px 12px;outline:none;font:inherit;font-size:11px;background:#fff}
+    .form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--teal)}
+    .event-list{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+    .event-list h4{margin:0 0 10px;font-size:11px;color:var(--navy)}
+    .event-item{padding:10px 0;border-bottom:1px solid #eef1f0;font-size:11px}
+    .event-item strong{display:block;color:var(--navy);margin-bottom:3px}
+    .event-item span{color:var(--muted);font-size:10px}
+    .event-delete{float:right;border:0;background:none;color:#b15d4b;cursor:pointer;font-size:10px}
+    .auth-modal{position:fixed;inset:0;background:rgba(4,19,29,.72);z-index:60;display:none;align-items:center;justify-content:center;padding:20px}
+    .auth-modal.show{display:flex}
+    .auth-panel{background:white;border-radius:23px;width:min(440px,100%);padding:28px;position:relative;box-shadow:var(--shadow)}
+    .auth-panel h3{font-size:29px;color:var(--navy);margin:5px 0}
+    .auth-panel>p{font-size:11px;color:var(--muted);line-height:1.7}
+    .auth-tabs{display:flex;background:#f0f5f3;border-radius:99px;padding:4px;margin:18px 0}
+    .auth-tabs button{flex:1;border:0;border-radius:99px;padding:10px;background:transparent;color:#65777e;font-size:11px;font-weight:700;cursor:pointer}
+    .auth-tabs button.active{background:white;color:var(--navy);box-shadow:0 2px 8px rgba(0,0,0,.07)}
+    .auth-close{position:absolute;right:15px;top:13px;border:0;background:#f2f5f4;border-radius:50%;height:32px;width:32px;font-size:18px;cursor:pointer}
+    .auth-message{font-size:10px;color:var(--teal);margin-top:10px;min-height:14px}
+    .demo-warning{background:#fff8e8;border:1px solid #f2dfb2;border-radius:12px;padding:10px 12px;color:#80642b;font-size:10px;line-height:1.6;margin-top:15px}
+    .small-muted{font-size:10px;color:var(--muted)}
+
+    .municipality-section{background:#f7faf9}
+    .municipality-tools{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}
+    .municipality-tools input,.municipality-tools select{border:1px solid var(--line);border-radius:999px;padding:13px 17px;background:#fff;font:inherit;font-size:12px;outline:none}
+    .municipality-tools input{flex:1;min-width:220px}
+    .municipality-tools input:focus,.municipality-tools select:focus{border-color:var(--teal)}
+    .municipality-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .municipality-card{background:#fff;border:1px solid var(--line);border-radius:19px;padding:21px;box-shadow:0 4px 14px rgba(16,43,63,.035)}
+    .municipality-card h3{font-size:21px;color:var(--navy);margin:0 0 7px}
+    .municipality-card .municipality-kind{font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:var(--teal);font-weight:700}
+    .municipality-card p{font-size:11px;line-height:1.7;color:var(--muted);min-height:56px;margin:10px 0 14px}
+    .contact-label{font-size:9px;text-transform:uppercase;letter-spacing:1px;font-weight:700;color:#84949a;margin-bottom:6px}
+    .contact-value{font-size:11px;color:var(--navy);font-weight:600;overflow-wrap:anywhere}
+    .municipality-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+    .municipality-actions a{border:1px solid var(--line);border-radius:99px;padding:9px 12px;font-size:10px;font-weight:700;color:var(--teal)}
+    .municipality-actions a:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
+    .contact-note{background:#fff8e8;border:1px solid #f2dfb2;border-radius:15px;padding:15px 17px;color:#78622f;font-size:11px;line-height:1.7;margin-top:22px}
+    @media(max-width:900px){.municipality-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:680px){.municipality-grid{grid-template-columns:1fr}}
+
+    @media(max-width:900px){.stay-grid{grid-template-columns:repeat(2,1fr)}.calendar-layout{grid-template-columns:1fr}}
+    @media(max-width:680px){.stay-grid{grid-template-columns:1fr}.calendar-card,.event-form{padding:15px}.calendar-date{min-height:48px;padding:6px}.calendar-date .event-dot{margin-top:5px}.calendar-head h3{font-size:20px}.account-name{display:none}}
+
+    @media(max-width:900px){.navlinks{gap:15px}.spot-grid{grid-template-columns:repeat(2,1fr)}.experience-grid{gap:30px}.experience-photo img{height:420px}}
+    @media(max-width:680px){
+      .topbar .container{justify-content:center}.nav{height:68px}.menu-btn{display:block}.navlinks{display:none;position:absolute;top:68px;left:0;right:0;background:white;padding:18px 25px 24px;box-shadow:0 15px 25px rgba(16,43,63,.1);flex-direction:column;align-items:flex-start}.navlinks.open{display:flex}.nav-cta{display:inline-flex;padding:10px 13px;font-size:11px}
+      .hero{min-height:590px}.hero-content{padding:75px 0}.hero-note{margin-top:40px}.stats{grid-template-columns:1fr;gap:15px}.stat{justify-content:flex-start}
+      section{padding:68px 0}.section-head{display:block}.section-head p{margin-top:12px}.spot-grid{grid-template-columns:1fr}.spot-photo{height:235px}
+      .experience-grid{grid-template-columns:1fr}.experience-photo img{height:330px}.activity-list{grid-template-columns:1fr}
+      .culture-grid{grid-template-columns:1fr}.food-inner{display:block}.food-inner .btn{margin-top:20px}.planner-box{grid-template-columns:1fr;padding:23px}.footer-grid{grid-template-columns:1fr;gap:25px}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar"><div class="container"><span>✦ BICOL REGION · PHILIPPINES</span><span>Beautiful Sorsogon — Where Beauty Is Everywhere</span></div></div>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home"><span class="brand-mark">⌁</span><span>DISCOVER SORSOGON<small>LAND OF KASANGGAYAHAN</small></span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+      <nav class="navlinks" id="navLinks">
+        <a href="#home">Home</a><a href="#destinations">Destinations</a><a href="#experiences">Experiences</a><a href="#municipalities">Municipalities</a><a href="#stays">Accommodations</a><a href="#calendar">Activity Calendar</a><a href="#culture">Culture</a><a href="#visit">Plan Your Visit</a>
+      </nav>
+      <button class="nav-cta" id="accountBtn" type="button">Login / Register</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <span class="eyebrow">A province worth discovering</span>
+        <h1>Find your own<br><em>piece of paradise.</em></h1>
+        <p>From quiet lakes and island beaches to rich heritage and warm local culture, discover the many reasons to explore Sorsogon.</p>
+        <div class="hero-actions"><a class="btn" href="#destinations">Explore destinations <span>↗</span></a><a class="btn btn-light" href="#experiences">Discover experiences</a></div>
+        <div class="hero-note"><span class="dot"></span><strong>15 destinations to explore</strong><span>·</span><span>One unforgettable province</span></div>
+      </div>
+    </section>
+
+    <div class="intro-strip"><div class="container stats">
+      <div class="stat"><span class="stat-icon">🌊</span><div><strong>Coast to countryside</strong><span>Beaches, bays, lakes and green landscapes</span></div></div>
+      <div class="stat"><span class="stat-icon">🌿</span><div><strong>Nature at every turn</strong><span>Discover the province's natural wonders</span></div></div>
+      <div class="stat"><span class="stat-icon">🏛️</span><div><strong>Culture that welcomes</strong><span>Local stories, heritage and Bicolano flavors</span></div></div>
+    </div></div>
+
+    <section id="destinations">
+      <div class="container">
+        <div class="section-head"><div><span class="section-kicker">Explore the province</span><h2>Places to fall in love with</h2></div><p>Choose a destination and start planning your next Sorsogon adventure. Search by name or filter by the kind of experience you want.</p></div>
+        <div class="search-row"><div class="searchbox"><span>⌕</span><input id="searchInput" type="search" placeholder="Search destinations or municipalities..." aria-label="Search destinations"></div></div>
+        <div class="filters" id="filters">
+          <button class="filter active" data-filter="All">All places</button>
+          <button class="filter" data-filter="Beach">Beaches & islands</button>
+          <button class="filter" data-filter="Nature">Nature & adventure</button>
+          <button class="filter" data-filter="Culture">Culture & heritage</button>
+          <button class="filter" data-filter="City">Sorsogon City</button>
+        </div>
+        <div class="spot-grid" id="spotGrid"></div>
+        <p class="disclaimer">Destination descriptions are introductory. Confirm access, boat arrangements, fees, opening hours, weather conditions and local guidelines with the relevant tourism office before travelling.</p>
+      </div>
+    </section>
+
+    <section class="experience" id="experiences">
+      <div class="container experience-grid">
+        <div class="experience-photo">
+          <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1100&q=85" alt="Green mountain landscape and lake">
+          <div class="photo-caption"><strong>Make room for wonder</strong><span>Slow down and enjoy the journey</span></div>
+        </div>
+        <div class="experience-copy">
+          <span class="section-kicker">More than a destination</span><h2>Make memories, your way.</h2>
+          <p>Whether you love the ocean, prefer a peaceful nature escape, or enjoy discovering local history, Sorsogon offers experiences for different kinds of travellers.</p>
+          <div class="activity-list">
+            <div class="activity"><div class="activity-icon">🏝️</div><div><strong>Island hopping</strong><span>Explore island shores, sandbars and clear coastal waters.</span></div></div>
+            <div class="activity"><div class="activity-icon">🥾</div><div><strong>Nature adventures</strong><span>Enjoy lakes, forest views, waterfalls and scenic walks.</span></div></div>
+            <div class="activity"><div class="activity-icon">🐋</div><div><strong>Wildlife encounters</strong><span>Learn about responsible, guide-led wildlife experiences.</span></div></div>
+            <div class="activity"><div class="activity-icon">📷</div><div><strong>Scenic sightseeing</strong><span>Capture coastlines, sunsets and memorable landmarks.</span></div></div>
+            <div class="activity"><div class="activity-icon">🏛️</div><div><strong>Heritage discovery</strong><span>Visit historic buildings and learn local stories.</span></div></div>
+            <div class="activity"><div class="activity-icon">🍽️</div><div><strong>Local food trips</strong><span>Taste Bicolano dishes and bring home local delicacies.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="municipality-section" id="municipalities">
+      <div class="container">
+        <div class="section-head"><div><span class="section-kicker">Local visitor assistance</span><h2>Explore all 15 LGUs.</h2></div><p>Every town and city has its own character. Find a local government contact to ask about attractions, local guides, group visits, permits, road conditions and tourism assistance.</p></div>
+        <div class="municipality-tools">
+          <input id="municipalitySearch" type="search" placeholder="Search a municipality or city..." aria-label="Search municipalities">
+          <select id="municipalityType" aria-label="Filter municipality type"><option value="All">All local governments</option><option value="Municipality">Municipalities</option><option value="City">City</option></select>
+        </div>
+        <div class="municipality-grid" id="municipalityGrid"></div>
+        <div class="contact-note"><strong>Contact information note:</strong> The emails below are publicly listed LGU contact channels from the Sorsogon Provincial Government's attraction directory, not necessarily direct personal email addresses of the tourism officers. When you contact them, ask to be referred to the Municipal/City Tourism, Culture and Arts Office. Tourism officer names and direct numbers are shown only where a public source could be verified. Please reconfirm details before your visit.</div>
+      </div>
+    </section>
+
+    <section class="stay-section" id="stays">
+      <div class="container">
+        <div class="section-head"><div><span class="section-kicker">Stay a little longer</span><h2>Find your place to stay.</h2></div><p>Browse a few accommodation options around the province. Choose a town close to the places you plan to visit, then contact the property to confirm room rates and availability.</p></div>
+        <div class="stay-grid" id="stayGrid"></div>
+        <p class="disclaimer">Listings are provided as a starting point, not an endorsement. Room rates, facilities, contact details and availability may change. Contact the property directly before making travel plans.</p>
+      </div>
+    </section>
+
+    <section class="calendar-section" id="calendar">
+      <div class="container">
+        <div class="section-head"><div><span class="section-kicker">Your trip planner</span><h2>Activity calendar.</h2></div><p>Plan your own Sorsogon itinerary. Select a date, add an activity, and keep your personal trip schedule in this browser.</p></div>
+        <div class="calendar-layout">
+          <div class="calendar-card">
+            <div class="calendar-head"><h3 id="calendarMonth">Month Year</h3><div class="month-controls"><button id="prevMonth" aria-label="Previous month">‹</button><button id="todayMonth">Today</button><button id="nextMonth" aria-label="Next month">›</button></div></div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+            <div class="small-muted" style="margin-top:12px">Gold dot = you have a planned activity on this date.</div>
+          </div>
+          <div class="event-form">
+            <h3>Plan an activity</h3>
+            <p class="selected-date-label" id="selectedDateLabel"></p>
+            <form id="eventForm">
+              <div class="form-field"><label for="eventTitle">Activity name</label><input id="eventTitle" type="text" placeholder="e.g. Visit Bulusan Lake" required maxlength="70"></div>
+              <div class="form-field"><label for="eventTime">Time (optional)</label><input id="eventTime" type="time"></div>
+              <div class="form-field"><label for="eventPlace">Place / municipality</label><input id="eventPlace" type="text" placeholder="e.g. Bulusan" maxlength="70"></div>
+              <button class="btn" type="submit" style="width:100%">＋ Add to calendar</button>
+            </form>
+            <div class="event-list"><h4>Activities for selected date</h4><div id="eventList"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="culture">
+      <div class="container">
+        <div class="section-head"><div><span class="section-kicker">The heart of Sorsogon</span><h2>Culture, stories & local flavor</h2></div><p>A trip becomes more meaningful when you get to know the people, traditions and flavors that make a place special.</p></div>
+        <div class="culture-grid">
+          <article class="culture-card"><div class="emoji">🎉</div><h3>Kasanggayahan</h3><p>Discover the province's identity through Kasanggayahan celebrations, local performances, community activities and cultural traditions. Check official announcements for event dates.</p></article>
+          <article class="culture-card"><div class="emoji">🥥</div><h3>Bicolano flavors</h3><p>Look out for pili products, fresh seafood and regional dishes. Ask local vendors about specialties and seasonal delicacies in each town.</p></article>
+          <article class="culture-card"><div class="emoji">🤝</div><h3>Warm hospitality</h3><p>Meet the communities behind each destination. Support local guides, small businesses, artisans and responsible tourism initiatives.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="food-banner">
+      <div class="container food-inner"><div><span class="eyebrow">A taste of the province</span><h2>Bring home a little Sorsogon.</h2><p>Make time for local markets, seafood stops and pasalubong shopping. Pili nuts and pili-based treats are among the region's familiar favorites.</p><div class="food-pills"><span>🥥 Pili delicacies</span><span>🐟 Fresh seafood</span><span>🌶️ Bicolano dishes</span><span>🎁 Local pasalubong</span></div></div><a class="btn btn-light" href="#visit">Plan your trip ↗</a></div>
+    </section>
+
+    <section class="planner" id="visit">
+      <div class="container">
+        <div class="section-head"><div><span class="section-kicker">Before you go</span><h2>Plan a thoughtful visit.</h2></div><p>A little preparation helps make every trip safer, smoother and more enjoyable.</p></div>
+        <div class="planner-box">
+          <div><h3>Your Sorsogon travel checklist</h3><p>Check weather and transport updates, confirm current fees and operating schedules, bring cash for small local transactions, follow site rules, and leave no litter behind. For wildlife activities, choose accredited or locally authorized guides and follow conservation instructions.</p></div>
+          <div class="planner-actions"><a class="btn" href="https://sorsogon.gov.ph/tourism/" target="_blank" rel="noopener">Official tourism site ↗</a><a class="btn outline-btn" href="https://sorsogon.gov.ph/tourism/interactive-map/" target="_blank" rel="noopener">Attraction map ↗</a></div>
+        </div>
+        <p class="disclaimer">This is an independent student-style tourism guide and is not an official government website. Images are illustrative and loaded from Unsplash. Always verify destination information with official local sources before travelling.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><a class="brand" href="#home" style="color:white"><span class="brand-mark">⌁</span><span>DISCOVER SORSOGON<small style="color:#9fb1b9">LAND OF KASANGGAYAHAN</small></span></a><p>Discover the natural beauty, heritage and hospitality of Sorsogon Province, at the southern tip of Luzon in the Bicol Region.</p></div>
+        <div><h4>Explore</h4><a href="#destinations">Tourist destinations</a><a href="#experiences">Things to do</a><a href="#municipalities">Municipalities & contacts</a><a href="#stays">Accommodations</a><a href="#calendar">Activity calendar</a><a href="#culture">Culture & food</a><a href="#visit">Travel tips</a></div>
+        <div><h4>Useful links</h4><a href="https://sorsogon.gov.ph/tourism/" target="_blank" rel="noopener">Sorsogon Provincial Tourism</a><a href="https://sorsogon.gov.ph/tourism/interactive-map/" target="_blank" rel="noopener">Official attraction map</a><a href="https://www.donsol.gov.ph/Tourism.html" target="_blank" rel="noopener">Donsol Tourism</a></div>
+      </div>
+      <div class="copyright"><span>© 2026 Discover Sorsogon. Made to celebrate the province.</span><span>Travel kindly. Explore responsibly. 💚</span></div>
+    </div>
+  </footer>
+
+
+  <div class="auth-modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="auth-panel">
+      <button class="auth-close" id="authClose" aria-label="Close">×</button>
+      <span class="section-kicker">Welcome, traveller</span><h3 id="authTitle">Join Discover Sorsogon.</h3>
+      <p>Save a simple visitor profile and personalize your trip-planning experience.</p>
+      <div class="auth-tabs"><button type="button" class="active" id="loginTab">Login</button><button type="button" id="registerTab">Register</button></div>
+      <form id="authForm">
+        <div class="form-field" id="nameField" style="display:none"><label for="authName">Full name</label><input id="authName" type="text" placeholder="Your name"></div>
+        <div class="form-field"><label for="authEmail">Email address</label><input id="authEmail" type="email" placeholder="you@example.com" required></div>
+        <div class="form-field"><label for="authPassword">Password</label><input id="authPassword" type="password" placeholder="Enter any password for this demo" required minlength="4"></div>
+        <button class="btn" id="authSubmit" type="submit" style="width:100%">Login</button>
+        <div class="auth-message" id="authMessage" aria-live="polite"></div>
+      </form>
+      <div class="demo-warning">Demo account feature only: this static HTML website has no secure server authentication. Passwords are not saved or verified. Do not use a real password. For a real public website, connect a secure backend and password authentication service.</div>
+    </div>
+  </div>
+
+  <div class="modal" id="spotModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-panel"><button class="close-modal" id="closeModal" aria-label="Close">×</button><img id="modalImage" src="" alt=""><div class="modal-content"><span class="spot-location" id="modalLocation"></span><h3 id="modalTitle"></h3><p id="modalDescription"></p><a class="btn" id="modalMap" href="#" target="_blank" rel="noopener">Find on Google Maps ↗</a></div></div>
+  </div>
+  <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+  <script>
+    const destinations = [
+      {name:"Rompeolas Baywalk",town:"Sorsogon City",category:"City",type:"Waterfront",desc:"A breezy waterfront promenade along Sorsogon Bay, ideal for a relaxed walk, sea views and catching the sunset.",img:"https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=900&q=80"},
+      {name:"Museo Sorsogon",town:"Sorsogon City",category:"Culture",type:"Museum",desc:"Explore the province's story through exhibits inside the restored Old Provincial Jail building at the Capitol Compound.",img:"https://images.unsplash.com/photo-1564399579883-451a5d44ec08?auto=format&fit=crop&w=900&q=80"},
+      {name:"Pepita Park",town:"Sorsogon City",category:"City",type:"Landmark",desc:"A roadside stop known for its crab-themed landmark and views toward Sorsogon Bay. A quick photo stop for travellers.",img:"https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=80"},
+      {name:"Paguriran Island & Lagoon",town:"Bacon District, Sorsogon City",category:"Beach",type:"Island & lagoon",desc:"A coastal attraction in Barangay Sawanga known for a rocky islet and a natural lagoon. Access can depend on tides and local conditions.",img:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80"},
+      {name:"Whale Shark Experience",town:"Donsol",category:"Nature",type:"Wildlife experience",desc:"Donsol is known for responsible, guide-led encounters with whale sharks (butanding). The usual season is November to early June, with sightings never guaranteed.",img:"https://images.unsplash.com/photo-1568430462989-44163eb1752f?auto=format&fit=crop&w=900&q=80"},
+      {name:"Donsol Firefly River",town:"Donsol",category:"Nature",type:"River adventure",desc:"Enjoy an after-sunset river cruise and look for fireflies among the riverside trees. Confirm current tours and river conditions locally.",img:"https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=900&q=80"},
+      {name:"Bulusan Lake",town:"Bulusan",category:"Nature",type:"Lake & rainforest",desc:"A peaceful lake surrounded by the lush landscape of Bulusan Volcano Natural Park. Check park access and activity availability before visiting.",img:"https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=80"},
+      {name:"Subic Pink Beach",town:"Matnog",category:"Beach",type:"Island beach",desc:"A boat-access beach on Calintaan Island, known for its subtle pinkish sand and clear coastal water. Arrange boats and local guidance before your trip.",img:"https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=80"},
+      {name:"Juag Fish Sanctuary",town:"Matnog",category:"Nature",type:"Marine sanctuary",desc:"A community-managed marine attraction where visitors can learn about coastal life. Follow local rules and avoid touching or disturbing marine animals.",img:"https://images.unsplash.com/photo-1546026423-cc4642628d2b?auto=format&fit=crop&w=900&q=80"},
+      {name:"Barcelona Ruins Park",town:"Barcelona",category:"Culture",type:"Heritage site",desc:"A coastal heritage stop near the town's historic church area, with remnants and landmarks that tell stories of Barcelona's past.",img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=80"},
+      {name:"Rizal Beach",town:"Gubat",category:"Beach",type:"Surf & seaside",desc:"A popular coastal area in Gubat. Enjoy the shoreline and, when conditions are suitable, explore the town's surf culture with local guidance.",img:"https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=900&q=80"},
+      {name:"Irosin Hot Springs",town:"Irosin",category:"Nature",type:"Hot spring",desc:"Unwind in the hot-spring area around Irosin, a town known for its geothermal waters. Contact individual resorts for current rates and facilities.",img:"https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=80"},
+      {name:"Pilar Sandbar",town:"Pilar",category:"Beach",type:"Sandbar",desc:"A coastal sandbar experience in Pilar. Conditions and visibility change with tides and weather, so arrange a local boat and check conditions first.",img:"https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=900&q=80"},
+      {name:"Bagatao Island",town:"Magallanes",category:"Culture",type:"Island heritage",desc:"An island with an important place in Sorsogon's maritime history, associated with a historic Spanish-era shipyard.",img:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80"},
+      {name:"Bahay na Bato",town:"Juban",category:"Culture",type:"Heritage houses",desc:"Discover ancestral-house architecture and local heritage in Juban. Respect private property and ask before entering or photographing homes.",img:"https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=900&q=80"},
+      {name:"Prieto Diaz Mangroves",town:"Prieto Diaz",category:"Nature",type:"Mangrove ecosystem",desc:"Explore the coastal mangrove environment and learn why these ecosystems matter for marine life and shoreline protection.",img:"https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=900&q=80"}
+    ];
+
+    const grid = document.getElementById("spotGrid");
+    const searchInput = document.getElementById("searchInput");
+    let activeFilter = "All";
+
+    function renderSpots(){
+      const query = searchInput.value.toLowerCase().trim();
+      const shown = destinations.filter(d => (activeFilter==="All" || d.category===activeFilter) &&
+        (d.name+" "+d.town+" "+d.type+" "+d.desc).toLowerCase().includes(query));
+      grid.innerHTML = shown.length ? shown.map((d) => {
+        const index = destinations.indexOf(d);
+        return `<article class="spot-card">
+          <div class="spot-photo"><img src="${d.img}" alt="${d.name} (illustrative image)" loading="lazy"><span class="tag">${d.type}</span></div>
+          <div class="spot-body"><div class="spot-location">${d.town}</div><h3>${d.name}</h3><p>${d.desc}</p>
+          <div class="spot-foot"><small>Explore Sorsogon</small><button class="text-link" data-detail="${index}">View details ↗</button></div></div>
+        </article>`;
+      }).join("") : `<div class="no-results">No destinations found. Try another keyword or category.</div>`;
+      grid.querySelectorAll("[data-detail]").forEach(btn => btn.addEventListener("click",()=>openDetails(Number(btn.dataset.detail))));
+    }
+
+    function openDetails(index){
+      const d=destinations[index];
+      document.getElementById("modalImage").src=d.img;
+      document.getElementById("modalImage").alt=d.name+" (illustrative image)";
+      document.getElementById("modalLocation").textContent=d.town+" · "+d.type;
+      document.getElementById("modalTitle").textContent=d.name;
+      document.getElementById("modalDescription").textContent=d.desc+" Please confirm current access, schedules, fees and visitor rules with the local tourism office before travelling.";
+      document.getElementById("modalMap").href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(d.name+" "+d.town+" Sorsogon Philippines");
+      document.getElementById("spotModal").classList.add("show");
+      document.body.style.overflow="hidden";
+    }
+    function closeDetails(){document.getElementById("spotModal").classList.remove("show");document.body.style.overflow="";}
+    document.getElementById("closeModal").addEventListener("click",closeDetails);
+    document.getElementById("spotModal").addEventListener("click",e=>{if(e.target.id==="spotModal")closeDetails()});
+    document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDetails()});
+    document.getElementById("filters").querySelectorAll("button").forEach(btn=>btn.addEventListener("click",()=>{
+      activeFilter=btn.dataset.filter;
+      document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b===btn));
+      renderSpots();
+    }));
+    searchInput.addEventListener("input",renderSpots);
+    document.getElementById("menuBtn").addEventListener("click",()=>document.getElementById("navLinks").classList.toggle("open"));
+    document.querySelectorAll(".navlinks a").forEach(a=>a.addEventListener("click",()=>document.getElementById("navLinks").classList.remove("open")));
+    const toTop=document.getElementById("toTop");
+    window.addEventListener("scroll",()=>toTop.classList.toggle("show",window.scrollY>500));
+    toTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+
+
+    // Public local-government contact directory for all 15 Sorsogon LGUs.
+    // General LGU email is labelled clearly; direct tourism-office contacts only where verified.
+    const municipalityContacts = [
+      {name:"Barcelona",type:"Municipality",email:"wework.barcelonaph@yahoo.com",about:"Explore coastal heritage, historic stone structures and traditional local crafts.",contactType:"LGU email",source:"https://sorsogon.gov.ph/tourism/interactive-map/"},
+      {name:"Bulan",type:"Municipality",email:"lgubulan@gmail.com",about:"A major coastal town known for fishing, agriculture and its lively local community.",contactType:"LGU email",source:"https://sorsogon.gov.ph/tourism/interactive-map/"},
+      {name:"Bulusan",type:"Municipality",email:"lgu.bulusan@yahoo.com",about:"Gateway to Bulusan Lake, mountain scenery, springs and protected natural areas.",contactType:"LGU email",source:"https://sorsogon.gov.ph/tourism/interactive-map/"},
+      {name:"Casiguran",type:"Municipality",email:"casiguranmio@gmail.com",about:"Discover the historic town and its coastal and agricultural communities.",contactType:"LGU email",source:"https://sorsogon.gov.ph/tourism/interactive-map/"},
+      {name:"Castilla",type:"Municipality",email:"progresibonglgucastilla@gmail.com",about:"A Sorsogon Bay town with forest products, agriculture and coastal scenery.",contactType:"LGU email",source:"https://sorsogon.gov.ph/tourism/interactive-map/"},
+      {name:"Donsol",type:"Municipality",email:"tourism@donsol.gov.ph",phone:"+63917 322 6109",about:"Ask the Donsol Tourism Office about whale shark interaction, firefly river tours, guides and accommodation.",contactType:"Direct Tourism Office",source:"https://www.donsol.gov.ph/Tourism.html"},
+      {name:"Gubat",type:"Municipality",email:"gubatsorsogon.lgu@gmail.com",about:"Known for surf culture, beaches and coastal community experiences.",contactType:"LGU email",source:"https://sorsogon.gov.ph/tourism/interactive-map/"},
+      {name:"Irosin",type:"Municipality",email:"municipalityofirosin@gmail.com",about:"An inland destination known for its valley landscape, hot springs and agricultural heritage.",contactType:"LGU email",source:"https://sorsogon.gov.ph/tourism/interactive-map/"},
+      {name:"Juban",type:"Municipality",email:"lgujuban123@gmail.com",about:"Explore ancestral houses, heritage architecture and local traditions.",contactType:"LGU email",source:"https://sorsogon.gov.ph/tourism/interactive-map/"},
+      {name:"Magallanes",type:"Municipality",email:"contact@magallanessorsogon.gov.ph",about:"Visit historic Gibalon and learn about the town's maritime heritage and Bagatao Island.",contactType:"LGU email",source:"https://sorsogon.gov.ph/tourism/interactive-map/"},
+      {name:"Matnog",type:"Municipality",email:"matnogsorsogon.lgu@gmail.com",about:"A southern gateway to island trips, beaches and coastal attractions. Check boat and sea conditions.",contactType:"LGU email",source:"https://sorsogon.gov.ph/tourism/interactive-map/"},
+      {name:"Pilar",type:"Municipality",email:"pilarsor.mayor@gmail.com",about:"A coastal town with shipbuilding heritage and access to island and marine attractions.",contactType:"LGU email",source:"https://sorsogon.gov.ph/tourism/interactive-map/"},
+      {name:"Prieto Diaz",type:"Municipality",email:"lce.prietodiaz@yahoo.com",about:"Discover coastal scenery, mangrove areas and local fishing communities.",contactType:"LGU email",source:"https://sorsogon.gov.ph/tourism/interactive-map/"},
+      {name:"Santa Magdalena",type:"Municipality",email:"lgu.smmo@gmail.com",about:"A quiet coastal destination known for beaches and fishing communities.",contactType:"LGU email",source:"https://sorsogon.gov.ph/tourism/interactive-map/"},
+      {name:"Sorsogon City",type:"City",email:"sorsogon.citytourism@gmail.com",phone:"+63 919 991 2289",officer:"Joni Asphasia O. Jao",about:"Contact the City Tourism, Culture and Arts Office for city attractions, visitor guidance and tourism-related inquiries.",contactType:"City Tourism Office",source:"https://sorsogoncity.gov.ph/wp-content/uploads/2023/11/Sorsogon-City-Citizens-Charter-2nd-Edition.pdf"}
+    ];
+    const municipalityGrid=document.getElementById("municipalityGrid");
+    function renderMunicipalities(){
+      const q=document.getElementById("municipalitySearch").value.toLowerCase().trim();
+      const type=document.getElementById("municipalityType").value;
+      const rows=municipalityContacts.filter(m=>(type==="All"||m.type===type)&&(m.name+" "+m.about).toLowerCase().includes(q));
+      municipalityGrid.innerHTML=rows.length?rows.map(m=>{
+        const map="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(m.name+" Sorsogon Philippines");
+        return `<article class="municipality-card">
+          <span class="municipality-kind">${m.type} · Sorsogon Province</span>
+          <h3>${m.name}</h3>
+          <p>${m.about}</p>
+          ${m.officer?`<div class="contact-label">Publicly listed tourism officer</div><div class="contact-value">${m.officer}</div>`:""}
+          <div class="contact-label" style="margin-top:12px">${m.contactType}</div>
+          <div class="contact-value">${m.email}</div>
+          ${m.phone?`<div class="contact-value" style="margin-top:5px">${m.phone}</div>`:""}
+          <div class="municipality-actions"><a href="mailto:${m.email}?subject=${encodeURIComponent("Tourism inquiry - "+m.name+", Sorsogon")}">Email LGU ↗</a>${m.phone?`<a href="tel:${m.phone.replace(/[^+0-9]/g,"")}">Call office ↗</a>`:""}<a href="${map}" target="_blank" rel="noopener">Map ↗</a><a href="${m.source}" target="_blank" rel="noopener">Source ↗</a></div>
+        </article>`;
+      }).join(""):'<div class="no-results">No local government found. Try another search.</div>';
+    }
+    document.getElementById("municipalitySearch").addEventListener("input",renderMunicipalities);
+    document.getElementById("municipalityType").addEventListener("change",renderMunicipalities);
+    renderMunicipalities();
+
+    // Accommodation directory: contact each property to verify current rates and availability.
+    const accommodations = [
+      {name:"Fernando's Hotel",town:"Sorsogon City",kind:"Hotel",desc:"A city-based hotel option for visitors who want a convenient base in the provincial capital.",img:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80"},
+      {name:"Antonio's Bed and Breakfast Hotel",town:"Sorsogon City",kind:"Bed & breakfast",desc:"A bed-and-breakfast option in the city, suitable to consider for a central overnight stay.",img:"https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800&q=80"},
+      {name:"Siama Hotel",town:"Sorsogon City",kind:"Boutique hotel",desc:"A boutique-style hotel in a garden setting. Contact the property for room types and current facilities.",img:"https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80"},
+      {name:"Villa Isabel Hotel",town:"Sorsogon City",kind:"Hotel",desc:"A city hotel with accommodation and on-site facilities. Confirm room availability and inclusions directly.",img:"https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80"},
+      {name:"Vitton & Woodland Beach Resorts",town:"Donsol",kind:"Beach resort",desc:"A beach-resort option in Dancalan, Donsol, convenient to explore the town's coastal and marine activities.",img:"https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80"},
+      {name:"Elysia Beach Resort",town:"Donsol",kind:"Beach resort",desc:"A Donsol beach-resort option. Check directly for current packages, room categories and availability.",img:"https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?auto=format&fit=crop&w=800&q=80"},
+      {name:"Casa Sereno Spring Resort",town:"Irosin",kind:"Spring resort",desc:"A resort option in Irosin for travellers planning a relaxing stay near the town's hot-spring attractions.",img:"https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80"},
+      {name:"Baia Nest",town:"Gubat",kind:"Villa / guest stay",desc:"A villa-style stay in Gubat for visitors who want to explore the town and nearby coast.",img:"https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80"},
+      {name:"The Point at Beata Beach & Sanctuary",town:"Santa Magdalena",kind:"Beach resort",desc:"A coastal resort option in Santa Magdalena for a quieter seaside getaway.",img:"https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=800&q=80"}
+    ];
+    const stayGrid = document.getElementById("stayGrid");
+    stayGrid.innerHTML = accommodations.map(a => {
+      const q = encodeURIComponent(a.name+" "+a.town+" Sorsogon Philippines");
+      return `<article class="stay-card"><div class="stay-image"><img src="${a.img}" alt="Illustrative accommodation photo" loading="lazy"><span class="stay-type">${a.kind}</span></div><div class="stay-content"><div class="stay-location">${a.town}</div><h3>${a.name}</h3><p>${a.desc}</p><div class="stay-links"><a href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener">View map ↗</a><a href="https://www.google.com/search?q=${q}+booking" target="_blank" rel="noopener">Check booking ↗</a></div></div></article>`;
+    }).join("");
+
+    // Activity calendar stores visitor-created plans in this browser only.
+    const calendarGrid = document.getElementById("calendarGrid");
+    const monthLabel = document.getElementById("calendarMonth");
+    const selectedLabel = document.getElementById("selectedDateLabel");
+    const eventList = document.getElementById("eventList");
+    const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+    let calendarCursor = new Date();
+    calendarCursor.setDate(1);
+    let selectedDate = new Date();
+    const dateKey = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+    const readEvents = () => { try { return JSON.parse(localStorage.getItem("sorsogonTripEvents") || "{}"); } catch(e) { return {}; } };
+    const writeEvents = events => localStorage.setItem("sorsogonTripEvents", JSON.stringify(events));
+    function renderCalendar(){
+      const year=calendarCursor.getFullYear(), month=calendarCursor.getMonth();
+      monthLabel.textContent=calendarCursor.toLocaleDateString("en-PH",{month:"long",year:"numeric"});
+      calendarGrid.innerHTML=dayNames.map(d=>`<div class="calendar-dayname">${d}</div>`).join("");
+      const firstDay=new Date(year,month,1).getDay();
+      const daysInMonth=new Date(year,month+1,0).getDate();
+      const prevDays=new Date(year,month,0).getDate();
+      const events=readEvents();
+      for(let i=0;i<42;i++){
+        let day, date, inMonth=true;
+        if(i<firstDay){day=prevDays-firstDay+i+1;date=new Date(year,month-1,day);inMonth=false;}
+        else if(i>=firstDay+daysInMonth){day=i-(firstDay+daysInMonth)+1;date=new Date(year,month+1,day);inMonth=false;}
+        else {day=i-firstDay+1;date=new Date(year,month,day);}
+        const key=dateKey(date), isToday=key===dateKey(new Date()), isSelected=key===dateKey(selectedDate);
+        const hasEvents=(events[key]||[]).length>0;
+        const btn=document.createElement("button");
+        btn.type="button";
+        btn.className="calendar-date"+(!inMonth?" muted":"")+(isToday?" today":"")+(isSelected?" selected":"");
+        btn.innerHTML=`<span class="date-num">${day}</span>${hasEvents?'<span class="event-dot"></span>':''}`;
+        btn.setAttribute("aria-label",date.toDateString());
+        btn.addEventListener("click",()=>{selectedDate=date;renderCalendar();renderEventList();});
+        calendarGrid.appendChild(btn);
+      }
+      selectedLabel.textContent=selectedDate.toLocaleDateString("en-PH",{weekday:"long",month:"long",day:"numeric",year:"numeric"});
+    }
+    function renderEventList(){
+      const events=readEvents(), key=dateKey(selectedDate), items=events[key]||[];
+      eventList.innerHTML=items.length?items.map((e,i)=>`<div class="event-item"><button class="event-delete" data-delete="${i}" type="button">Remove</button><strong>${escapeText(e.title)}</strong><span>${e.time?e.time+" · ":""}${escapeText(e.place||"Sorsogon")}</span></div>`).join(""):'<div class="small-muted">No activities planned for this date yet.</div>';
+      eventList.querySelectorAll("[data-delete]").forEach(b=>b.addEventListener("click",()=>{
+        const all=readEvents();all[key].splice(Number(b.dataset.delete),1);if(!all[key].length)delete all[key];writeEvents(all);renderCalendar();renderEventList();
+      }));
+    }
+    function escapeText(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+    document.getElementById("prevMonth").addEventListener("click",()=>{calendarCursor.setMonth(calendarCursor.getMonth()-1);renderCalendar();});
+    document.getElementById("nextMonth").addEventListener("click",()=>{calendarCursor.setMonth(calendarCursor.getMonth()+1);renderCalendar();});
+    document.getElementById("todayMonth").addEventListener("click",()=>{calendarCursor=new Date();calendarCursor.setDate(1);selectedDate=new Date();renderCalendar();renderEventList();});
+    document.getElementById("eventForm").addEventListener("submit",e=>{
+      e.preventDefault();
+      const title=document.getElementById("eventTitle").value.trim();
+      if(!title)return;
+      const all=readEvents(),key=dateKey(selectedDate);
+      all[key]=all[key]||[];
+      all[key].push({title,time:document.getElementById("eventTime").value,place:document.getElementById("eventPlace").value.trim()});
+      writeEvents(all);e.target.reset();renderCalendar();renderEventList();
+    });
+    renderCalendar();renderEventList();
+
+    // Front-end demonstration account: only profile name/email is kept locally.
+    const authModal=document.getElementById("authModal");
+    const authForm=document.getElementById("authForm");
+    let authMode="login";
+    function openAuth(){authModal.classList.add("show");document.body.style.overflow="hidden";document.getElementById("authMessage").textContent="";}
+    function closeAuth(){authModal.classList.remove("show");document.body.style.overflow="";}
+    function setAuthMode(mode){
+      authMode=mode;
+      document.getElementById("loginTab").classList.toggle("active",mode==="login");
+      document.getElementById("registerTab").classList.toggle("active",mode==="register");
+      document.getElementById("nameField").style.display=mode==="register"?"block":"none";
+      document.getElementById("authName").required=mode==="register";
+      document.getElementById("authTitle").textContent=mode==="register"?"Create your traveller profile.":"Welcome back, traveller.";
+      document.getElementById("authSubmit").textContent=mode==="register"?"Create profile":"Login";
+      document.getElementById("authMessage").textContent="";
+    }
+    function updateAccountButton(){
+      const profile=JSON.parse(localStorage.getItem("sorsogonVisitorProfile")||"null");
+      const btn=document.getElementById("accountBtn");
+      btn.textContent=profile?`Hi, ${profile.name.split(" ")[0]} · Logout`:"Login / Register";
+    }
+    document.getElementById("accountBtn").addEventListener("click",()=>{
+      if(localStorage.getItem("sorsogonVisitorProfile")){localStorage.removeItem("sorsogonVisitorProfile");updateAccountButton();}
+      else {setAuthMode("login");openAuth();}
+    });
+    document.getElementById("authClose").addEventListener("click",closeAuth);
+    authModal.addEventListener("click",e=>{if(e.target===authModal)closeAuth();});
+    document.getElementById("loginTab").addEventListener("click",()=>setAuthMode("login"));
+    document.getElementById("registerTab").addEventListener("click",()=>setAuthMode("register"));
+    authForm.addEventListener("submit",e=>{
+      e.preventDefault();
+      const email=document.getElementById("authEmail").value.trim();
+      const password=document.getElementById("authPassword").value;
+      if(!email||password.length<4)return;
+      const name=authMode==="register"?document.getElementById("authName").value.trim():(email.split("@")[0]);
+      if(authMode==="register"&&!name)return;
+      localStorage.setItem("sorsogonVisitorProfile",JSON.stringify({name,email}));
+      document.getElementById("authMessage").textContent=authMode==="register"?"Profile created for this browser. Welcome!":"Demo login successful. Welcome back!";
+      updateAccountButton();
+      setTimeout(closeAuth,900);
+      authForm.reset();
+    });
+    updateAccountButton();
+
+    renderSpots();
+  </script>
+</body>
+</html>
